@@ -1,0 +1,26 @@
+# GenAI Secrets
+.env
+safety_results.json
+live_safety_results.json
+# Python compiled files (NOT .py source files)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*$py.class
+
+# Virtual environment
+venv/
+.venv/
+
+# Editor
+.vscode/
+
+# Tools
+.deepeval/
+
+# ChromaDB local data (don't commit this)
+chroma_db/
+
+#.md Files
+*.md
