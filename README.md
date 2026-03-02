@@ -164,7 +164,6 @@ Shubhangi Ajegaonkar
 - LinkedIn: https://www.linkedin.com/in/shubhangi-ajegaonkar-62aa76aa/
 - Email: shubhangi.ajegaonkar@gmail.com
 
-- Portfolio: [Your Website if applicable]
 
 ---
 
