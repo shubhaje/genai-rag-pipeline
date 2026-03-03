@@ -1,6 +1,6 @@
 # RAG Pipeline with Automated Quality Testing
 
-Production-ready Retrieval-Augmented Generation system with comprehensive test suite achieving perfect quality scores.
+Production-ready Retrieval-Augmented Generation system with comprehensive test suite and reproducible quality metrics.
 
 ## 🎯 Project Highlights
 
@@ -35,9 +35,9 @@ Production-ready Retrieval-Augmented Generation system with comprehensive test s
 ## 🧪 Test Coverage
 ```
 tests/
-├── test_rag_basic.py        (5 integration tests - real LLM calls)
-├── test_rag_mocked.py        (5 unit tests - mocked, 85× faster)
-└── test_adversarial.py       (17 adversarial tests - designed to break system)
+├── test_rag_basic.py            (integration tests - real LLM calls)
+├── test_rag_mocked_basic.py     (unit tests - mocked, fast)
+└── test_adversarial.py          (adversarial tests - designed to break system)
 ```
 
 **Test Categories:**
@@ -89,7 +89,13 @@ cd rag-pipeline
 
 # Create virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+# Activate virtualenv
+# On macOS / Linux:
+source venv/bin/activate
+# On Windows (PowerShell):
+venv\Scripts\Activate.ps1
+# Or (cmd.exe):
+venv\Scripts\activate.bat
 
 # Install dependencies
 pip install -r requirements.txt
@@ -107,7 +113,7 @@ python rag_pipeline.py
 pytest tests/ -v
 
 # Run only fast mocked tests
-pytest tests/test_rag_mocked.py -v
+pytest tests/test_rag_mocked_basic.py -v
 
 # View quality report
 python quality_report.py
@@ -115,20 +121,20 @@ python quality_report.py
 
 ## 📂 Project Structure
 ```
-genai_project/
-├── rag_pipeline.py              # Main RAG implementation
-├── quality_report.py            # Quality metrics summary
-├── golden_dataset.py            # Benchmark Q&A pairs
-├── requirements.txt             # Python dependencies
-├── sample_docs/                 # Knowledge base documents
+genai-rag-pipeline/
+├── rag_pipeline.py                # Main RAG implementation
+├── quality_report.py              # Quality metrics summary
+├── golden_dataset.py              # Benchmark Q&A pairs
+├── requirements.txt               # Python dependencies
+├── sampledocs/                    # Knowledge base documents (repo path)
 │   ├── refund.txt
 │   ├── leave.txt
 │   └── onboarding.txt
 └── tests/
-    ├── conftest.py              # pytest fixtures
-    ├── test_rag_basic.py        # Integration tests
-    ├── test_rag_mocked.py       # Unit tests (mocked)
-    └── test_adversarial.py      # Adversarial tests
+    ├── conftest.py                # pytest fixtures
+    ├── test_rag_basic.py          # Integration tests
+    ├── test_rag_mocked_basic.py   # Unit tests (mocked, fast)
+    └── test_adversarial.py        # Adversarial tests
 ```
 
 ## 📈 Before vs After Optimization
