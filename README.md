@@ -22,9 +22,19 @@ Production-ready Retrieval-Augmented Generation system with comprehensive test s
 
 ## 🚀 Tech Stack
 
+### Option 1: Local (Ollama)
 - **LLM:** LLaMA 3.2 (via Ollama - local inference)
+- **Embeddings:** Local embeddings model
 - **Framework:** LangChain (RAG orchestration)
 - **Vector DB:** ChromaDB (local development)
+
+### Option 2: Cloud (HuggingFace + Groq)
+- **LLM:** LLaMA 3.1 8B (via Groq API - cloud inference)
+- **Embeddings:** HuggingFace sentence-transformers (all-MiniLM-L6-v2)
+- **Framework:** LangChain (RAG orchestration)
+- **Vector DB:** ChromaDB (local development)
+
+### General Stack
 - **Testing:** pytest (27 tests with mocking and adversarial scenarios)
 - **Evaluation:** RAGAS concepts (faithfulness, precision, recall, relevancy)
 
@@ -78,8 +88,14 @@ Built 17 test cases designed to break the system. **Found 1 vulnerability:** Sys
 ## 🏃 Quick Start
 
 ### Prerequisites
+
+**Option 1 (Local - Ollama):**
 - Python 3.11+
 - Ollama installed ([ollama.com](https://ollama.com))
+
+**Option 2 (Cloud - Groq API):**
+- Python 3.11+
+- Groq API key from [console.groq.com](https://console.groq.com) (free tier available)
 
 ### Installation
 ```bash
@@ -100,15 +116,30 @@ venv\Scripts\activate.bat
 # Install dependencies
 pip install -r requirements.txt
 
-# Pull LLaMA model (first time only)
+# For Option 1 (Ollama - local):
 ollama pull llama3.2
+
+# For Option 2 (Groq - cloud):
+# Create .env file and add:
+# GROQ_API_KEY=your_key_here
 ```
 
 ### Run Pipeline
-```bash
-# Run RAG pipeline
-python rag_pipeline.py
 
+**Local Implementation (Ollama):**
+```bash
+# Run RAG pipeline with Ollama
+python rag_pipeline.py
+```
+
+**Cloud Implementation (Groq + HuggingFace):**
+```bash
+# Run RAG pipeline with Groq API
+python rag_huggingFace.py
+```
+
+**Testing & Evaluation:**
+```bash
 # Run all tests
 pytest tests/ -v
 
@@ -122,11 +153,13 @@ python quality_report.py
 ## 📂 Project Structure
 ```
 genai-rag-pipeline/
-├── rag_pipeline.py                # Main RAG implementation
+├── rag_pipeline.py                # Main RAG implementation (local Ollama)
+├── rag_huggingFace.py             # HuggingFace + Groq implementation (cloud API)
 ├── quality_report.py              # Quality metrics summary
 ├── golden_dataset.py              # Benchmark Q&A pairs
 ├── requirements.txt               # Python dependencies
-├── sampledocs/                    # Knowledge base documents (repo path)
+├── .env                           # Environment variables (Groq API key)
+├── sampledocs/                    # Knowledge base documents
 │   ├── refund.txt
 │   ├── leave.txt
 │   └── onboarding.txt
@@ -146,6 +179,17 @@ genai-rag-pipeline/
 | Answer Quality | 60% | 100% | Systematic debugging + testing |
 | Test Suite Speed | 85s | <1s | Added mocked unit tests |
 
+## 🔄 Implementation Comparison
+
+| Aspect | Ollama (Local) | Groq (Cloud) |
+|--------|--|--|
+| **Inference** | Local GPU/CPU | Cloud API |
+| **Setup** | Requires Ollama installation | Just API key needed |
+| **Speed** | Depends on hardware | Optimized cloud infrastructure |
+| **Privacy** | Data stays local | Data sent to Groq |
+| **Cost** | Free (self-hosted) | Free tier + paid usage |
+| **Embeddings** | Local model | HuggingFace (sentence-transformers) |
+
 ## 🎓 Skills Demonstrated
 
 - **RAG Architecture:** End-to-end pipeline design (ingestion → chunking → embedding → retrieval → generation)
@@ -154,15 +198,19 @@ genai-rag-pipeline/
 - **Test Automation:** pytest with fixtures, mocking, parametrization, adversarial scenarios
 - **Prompt Engineering:** Experimental approach to guardrail optimization with measurable outcomes
 - **LangChain:** LCEL chains, retrievers, prompt templates, document loaders, text splitters
+- **Multiple Implementations:** Local (Ollama) vs Cloud-based (Groq API) RAG pipelines
+- **HuggingFace Integration:** Lightweight embeddings models for language understanding
 
 ## 🚧 Future Enhancements
 
+- [ ] Add benchmarking between Ollama vs Groq implementations (latency, accuracy trade-offs)
 - [ ] Migrate to Azure OpenAI + Azure AI Search (cloud deployment)
 - [ ] Expand golden dataset from 5 to 50+ questions
 - [ ] Add Flask API wrapper for production-like serving
 - [ ] Implement CI/CD with GitHub Actions (automated testing on PR)
 - [ ] Add Cosmos DB for conversation history (multi-turn chat)
 - [ ] Deploy as Azure Function with Application Insights monitoring
+- [ ] Add support for more LLM providers (OpenAI, Claude, etc.)
 
 ## 📧 Contact
 
