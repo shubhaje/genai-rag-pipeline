@@ -3,7 +3,7 @@ Golden Dataset for RAG Testing
 Comprehensive test cases covering multiple scenarios
 """
 
-from rag_pipeline import rag_chain
+from rag_pipeline_huggingFace import rag_chain
 import json
 from datetime import datetime
 
